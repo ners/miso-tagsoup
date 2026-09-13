@@ -22,10 +22,10 @@ import           Text.HTML.TagSoup.Tree (parseTree, TagTree(..))
 -----------------------------------------------------------------------------
 -- | Used to support RawText, inlining of HTML.
 -- Filters tree to only branches and leaves w/ Text tags.
--- converts to `View m a`. Note: if HTML is malformed,
+-- converts to `View c p m a`. Note: if HTML is malformed,
 -- (e.g. closing tags and opening tags are present) they will
 -- be removed.
-parseView :: Namespace -> MisoString -> [View context model action]
+parseView :: Namespace -> MisoString -> [View context props model action]
 parseView ns html = reverse (go (parseTree html) [])
   where
     go [] xs = xs
@@ -45,10 +45,10 @@ parseView ns html = reverse (go (parseTree html) [])
     go (TagLeaf _ : next) views =
       go next views
 -----------------------------------------------------------------------------
-rawSVG :: MisoString -> [View context model action]
+rawSVG :: MisoString -> [View context props model action]
 rawSVG = parseView SVG
 -----------------------------------------------------------------------------
-rawHTML :: MisoString -> [View context model action]
+rawHTML :: MisoString -> [View context props model action]
 rawHTML = parseView HTML
 -----------------------------------------------------------------------------
 #ifndef VANILLA
