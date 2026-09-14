@@ -56,7 +56,7 @@ library
     Miso.Html.Parse
   build-depends:
     base < 5,
-    miso > 1.9 && < 1.14,
+    miso >=1.14 && < 1.15,
     tagsoup < 0.15
 
 source-repository head
